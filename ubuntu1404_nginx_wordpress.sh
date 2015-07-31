@@ -1,7 +1,9 @@
 #!/bin/bash
+
 ###############################
 #    default nginx block only #
 ###############################
+
 # dep: mysql php nginx
 # needs empty db
 #   mysql -u root -p
@@ -10,6 +12,7 @@
 #   grant all privileges on db.* to user@localhost;
 #   flush privileges;
 #   exit
+
 cd ~
 wget http://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz

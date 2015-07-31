@@ -13,21 +13,22 @@ EOF
 cd /etc/nginx/sites-available/
 sudo touch example.test
 
-sudo cat >> example.test << EOF
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server ipv6only=on;
-
-    root /var/www/example.test/html;
-    index index.html index.htm;
-
-    server_name example.test www.example.test;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-}
-EOF
+# manually!
+#sudo cat >> example.test << EOF
+#server {
+#    listen 80 default_server;
+#    listen [::]:80 default_server ipv6only=on;
+#
+#    root /var/www/example.test/html;
+#    index index.html index.htm;
+#
+#    server_name example.test www.example.test;
+#
+#    location / {
+#        try_files $uri $uri/ =404;
+#    }
+#}
+#EOF
 
 sudo ln -s /etc/nginx/sites-available/example.test /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default

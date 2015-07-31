@@ -18,8 +18,15 @@ sudo apt-get install php5-gd libssh2-php -y
 # change wp config now or later
 sudo rsync -avP ~/wordpress/ ./
 cd /var/www/html/
+
 sudo chown -R $USER:www-data /var/www/html/*
+
 sudo mkdir wordpress/wp-content/uploads
 sudo chown -R :www-data wordpress/wp-content/uploads
+sudo chmod -R 755 wordpress/wp-content/
+# avoid Connection information death
+sudo usermod -s -G www-data $USER
+# with plugins still no luck?
 
+# change the wp-config now
 # install ..

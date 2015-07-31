@@ -6,14 +6,14 @@ sudo chmod -R 755 /var/www
 cd /var/www/example.com/html/
 sudo touch index.html
 
-cat >> index.html << EOF
+sudo cat >> index.html << EOF
 <h1>Success!  The example.com server block is working!</h1>
 EOF
 
 cd /etc/nginx/sites-available/
 sudo touch example.com
 
-cat >> example.com << EOF
+sudo cat >> example.com << EOF
 server {
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;

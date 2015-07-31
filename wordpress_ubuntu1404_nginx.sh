@@ -1,6 +1,6 @@
-#!bin/bash
+#!/bin/bash
 ###############################
-#    no nginx blocks are used #
+#    default nginx block only #
 ###############################
 # dep: mysql php nginx
 # needs empty db

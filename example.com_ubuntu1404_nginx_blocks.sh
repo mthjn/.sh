@@ -1,27 +1,27 @@
 #!/bin/bash
-sudo mkdir -p /var/www/example.com/html
-sudo chown -R $USER:$USER /var/www/example.com/html
+sudo mkdir -p /var/www/example.test/html
+sudo chown -R $USER:$USER /var/www/example.test/html
 sudo chmod -R 755 /var/www
 
-cd /var/www/example.com/html/
+cd /var/www/example.test/html/
 sudo touch index.html
 
 sudo cat >> index.html << EOF
-<h1>Success!  The example.com server block is working!</h1>
+<h1>Success!  The example.test server block is working!</h1>
 EOF
 
 cd /etc/nginx/sites-available/
-sudo touch example.com
+sudo touch example.test
 
-sudo cat >> example.com << EOF
+sudo cat >> example.test << EOF
 server {
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
 
-    root /var/www/example.com/html;
+    root /var/www/example.test/html;
     index index.html index.htm;
 
-    server_name example.com www.example.com;
+    server_name example.test www.example.test;
 
     location / {
         try_files $uri $uri/ =404;
@@ -29,7 +29,7 @@ server {
 }
 EOF
 
-sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/example.test /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default
 
 # sudo vim /etc/nginx/nginx.conf

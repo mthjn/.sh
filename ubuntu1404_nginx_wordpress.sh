@@ -3,6 +3,14 @@
 ###############################
 #    default nginx block only #
 ###############################
+# your server path here
+NPATH=/usr/share/nginx/html/typo.test/www/wp
+# name of wp for wget
+WP=latest.tar.gz
+
+echo '============================'
+echo 'Your server path: '
+echo $NPATH
 
 # dep: mysql php nginx
 # needs empty db
@@ -12,24 +20,32 @@
 #   grant all privileges on db.* to user@localhost;
 #   flush privileges;
 #   exit
+##################################################
 
 cd ~
+#check if root
+sudo ls -lrt
+
+rm -rf $WP
+
+echo 'Getting latest wp into home'
 wget http://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz
+echo 'getting dependencies'
 sudo apt-get update
 sudo apt-get install php5-gd libssh2-php -y
-# change wp config now or later
-sudo rsync -avP ~/wordpress/ ./
-cd /var/www/html/
+echo 'rsync to server'
+cd $NPATH
+pwd
+sudo rsync -aqP ~/wordpress/ ./
 
-sudo chown -R $USER:www-data /var/www/html/*
+echo 'changing ownership to www-data'
+sudo chown -R $USER:www-data $NPATH
 
-sudo mkdir wordpress/wp-content/uploads
-sudo chown -R :www-data wordpress/wp-content/uploads
-sudo chmod -R 755 wordpress/wp-content/
+sudo mkdir -p $NPATH/wp-content/uploads
+sudo chown -R :www-data $NPATH/wp-content/uploads
+sudo chmod -R 755 $NPATH/wp-content/uploads
 # avoid Connection information death
 sudo usermod -s -G www-data $USER
 # with plugins still no luck?
-
-# change the wp-config now
-# install ..
+echo 'Done, change the wp-config now, install ..'

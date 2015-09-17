@@ -45,7 +45,14 @@ sudo chown -R $USER:www-data $NPATH
 sudo mkdir -p $NPATH/wp-content/uploads
 sudo chown -R :www-data $NPATH/wp-content/uploads
 sudo chmod -R 755 $NPATH/wp-content/uploads
+
+echo 'creating empty writable wp-config'
+sudo touch $NPATH/wp-config.php
+sudo chown :www-data $NPATH/wp-config.php
+sudo chmod 755 $NPATH/wp-config.php
+
 # avoid Connection information death
 sudo usermod -s -G www-data $USER
-# with plugins still no luck?
+
+
 echo 'Done, change the wp-config now, install ..'

@@ -24,8 +24,11 @@ echo $NPATH
 
 cd ~
 #check if root
-sudo ls -lrt
 
+if [ `id -u` -ne '0' ]; then
+  echo "Run it as root" >&2
+  exit 1
+fi
 rm -rf $WP
 
 echo 'Getting latest wp into home'
